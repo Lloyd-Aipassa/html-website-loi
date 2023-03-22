@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link rel="stylesheet" href="/css/HeaderFooter.css" />
+		<link rel="stylesheet" href="/css/city-tokyo.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="/css/contact.css">
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD5PFJkEqpcz9TwuCUuSvenmbv__vpUVE&callback=initMap&libraries=&v=weekly"
+			async
+			defer
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+		></script>
+		<title>Contact</title>
+	</head>
+	<body>
+		<article>
+			<header>
+				<a href="/" class="logo">
+					<img
+						src="/images/logo.jpg"
+						alt="logo"
+					/>
+					<p>Visit me</p>
+				</a>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li>
+							<a href="/New-York.html"
+								>New York</a
+							>
+						</li>
+						<li>
+							<a href="/Parijs.html"
+								>Parijs</a
+							>
+						</li>
+						<li>
+							<a href="/Tokyo.html"
+								>Tokyo</a
+							>
+						</li>
+						<li>
+							<a
+								href="/Contact.html"
+								style="
+									color: var(
+										--main-color-orange
+									);
+								"
+								>Contact</a
+							>
+						</li>
+					</ul>
+					<div class="hamburger-menu">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</nav>
+			</header>
+
+			<section class="banner">
+				<h1>Contact</h1>
+			</section>
+
+			<section class="intro-form">
+				<h2>Contact us</h2>
+
+				<p>
+					Welcome to our Contact Page! We hope you
+					are as excited to reach out to us as we
+					are to hear from you. Whether you have
+					questions or just want a coffee at our
+					office, let us know, we want to hear
+					from you!
+				</p>
+
+				<br />
+
+				<form
+					id="contact-form"
+					onsubmit="return clickSucces()"
+				>
+					<input
+						type="hidden"
+						name="contact_number"
+					/>
+					<label>Name</label>
+					<input
+						type="text"
+						name="name"
+						id="name-form"
+						required
+					/>
+					<label>Email</label>
+					<input
+						type="email"
+						name="email"
+						required
+					/>
+					<label>Phone</label>
+					<input
+						type="text"
+						name="phone"
+						required
+					/>
+					<label>Message</label>
+					<textarea name="message"></textarea>
+					<input type="submit" value="Send" />
+				</form>
+
+				<div id="map"></div>
+			</section>
+
+			<footer>
+				<div class="adres-footer">
+					<p>
+						<span><b>Adress</b></span
+						><br />
+						Europaplein 24,<br />
+						1078 GZ<br />
+						Amsterdam
+					</p>
+				</div>
+				<div class="footer-social">
+					<a href="https://www.instagram.com/"
+						><i
+							class="fa-brands fa-instagram fa-xl"
+							width="50px"
+						></i>
+					</a>
+					<a href="https://nl-nl.facebook.com/"
+						><i
+							class="fa-brands fa-facebook fa-xl"
+						></i
+					></a>
+					<a href="https://twitter.com/?lang=nl/"
+						><i
+							class="fa-brands fa-twitter fa-xl"
+						></i
+					></a>
+					<a href="https://www.linkedin.com/"
+						><i
+							class="fa-brands fa-linkedin fa-xl"
+						></i
+					></a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li>
+							<a href="/New-York.html"
+								>New York</a
+							>
+						</li>
+						<li>
+							<a href="/Parijs.html"
+								>Parijs</a
+							>
+						</li>
+						<li>
+							<a href="/Tokyo.html"
+								>Tokyo</a
+							>
+						</li>
+						<li>
+							<a href="/Contact.html"
+								>Contact</a
+							>
+						</li>
+					</ul>
+				</nav>
+			</footer>
+		</article>
+
+		<script src="/javascript/emailJS.js"></script>
+		<script src="/javascript/apiMaps.js"></script>
+		<script src="/javascript/hamburger.js"></script>
+	</body>
+</html>
+
+

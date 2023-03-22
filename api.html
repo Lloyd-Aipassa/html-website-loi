@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+        <h1>bitcoin prijs</h1>
+        <p>momenteel staat de huidige bitcoin prijs op €<span id="btc-prijs"></span></p>
+        <p>momenteel staat de huidige cardano prijs op €<span id="car-prijs"></span></p>
+        <p>momenteel staat de huidige sundaeswap prijs op €<span id="sun-prijs"></span></p>
+
+        <button id="button">notifi</button>
+
+		<script>
+			const options = {
+				method: "GET",
+				headers: {
+					"X-RapidAPI-Key":
+						"c368f482e7mshb1aff7565b94e74p195cecjsn1e4501d97f41",
+					"X-RapidAPI-Host":
+						"coingecko.p.rapidapi.com",
+				},
+			};
+
+			async function getBTC(){
+                const response = await fetch('https://coingecko.p.rapidapi.com/coins/bitcoin?market_data=true', options);
+                const data = await response.json();
+                console.log(data);
+                document.querySelector('#btc-prijs').textContent = data.market_data.current_price.eur
+            }
+			
+            async function getCar(){
+                const response = await fetch('https://coingecko.p.rapidapi.com/coins/cardano?market_data=true', options);
+                const dataCardano = await response.json();
+                console.log(dataCardano);
+                document.querySelector('#car-prijs').textContent = dataCardano.market_data.current_price.eur
+            }
+
+            async function getSun(){
+                const response = await fetch('https://coingecko.p.rapidapi.com/coins/sundaeswap?market_data=true', options);
+                const dataSundae = await response.json();
+                console.log(dataSundae);
+                document.querySelector('#sun-prijs').textContent = dataSundae.market_data.current_price.eur
+            }
+
+            getBTC()
+            getCar()
+            getSun()
+
+            const button = document.getElementById('button');
+            button.addEventListener("click", function(){
+                Notification.requestPermission().then(perm =>{
+                    alert(perm)
+                })
+            })
+			
+			
+
+		</script>
+	</body>
+</html>
