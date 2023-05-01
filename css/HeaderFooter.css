@@ -124,7 +124,7 @@ nav li a {
 
 	header {
 		padding: 5px 20px;
-		position: fixed;
+		position: sticky;
 		top: 0;
 		left: 0;
 	}
