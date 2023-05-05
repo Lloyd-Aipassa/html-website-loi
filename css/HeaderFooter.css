@@ -99,6 +99,10 @@ nav li a {
 	color: black;
 }
 
+.mob-nav{
+	display: none;
+}
+
 .transition {
 	opacity: 0;
 }
@@ -147,13 +151,14 @@ nav li a {
 	}
 
 	header nav ul.show {
-		transform: translatex(0);
+		transform: translatex(0%);
 		position: fixed;
 		opacity: 1;
 		top: 10vh;
-		padding: 50px;
+		padding: 30px;
+		/* padding-left: 100px; */
 		left: 0;
-		background-color: #fff;
+		background-color: #ffffffb7;
 		display: flex;
 		flex-direction: column;
 		gap: 0px;
@@ -161,6 +166,9 @@ nav li a {
 		height: 90vh;
 		transition: all 500ms;
 		z-index: 1000;
+		width: 80%;
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
 	}
 
 	nav li a {
@@ -185,12 +193,14 @@ nav li a {
 
 /********Footer*********/
 footer {
+	position: relative;
 	min-height: 20vh;
 	background-color: #1d1d1d;
 	padding: 50px 5%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	justify-items: center;
+	z-index: 50;
 }
 
 footer p,
@@ -233,6 +243,17 @@ footer .fa-brands {
 	header img{
 		width: 30%;
 	}
+
+	.mob-nav{
+		display: block;
+	}
+
+	.con{
+		margin-bottom: 40px;
+	}
+
+
+	
 	footer {
 		min-height: 40vh;
 		background-color: #1d1d1d;
