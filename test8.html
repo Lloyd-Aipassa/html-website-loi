@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="algemeen">
+        <div class="scroller" data-direction="right" data-speed="slow">
+
+
+            <div class="scroller__inner">
+
+                <img class="jh"
+                    src="https://lara.brooklynwebdesign.nl/wp-content/uploads/2024/01/logo-jongehonden-1-1.png"
+                    alt="logo Brand Folk">
+                <img class="ps"
+                    src="https://lara.brooklynwebdesign.nl/wp-content/uploads/2024/01/polestar-logo-290x290-1.png"
+                    alt="logo Brand Folk">
+
+                <img class="volvo" src="https://lara.brooklynwebdesign.nl/wp-content/uploads/2024/01/Volvo.png"
+                    alt="logo dokter dent">
+
+                <img class="rb" src="https://lara.brooklynwebdesign.nl/wp-content/uploads/2024/01/logo_red_bain-1.png"
+                    alt="logo Lotus">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const scrollers = document.querySelectorAll(".scroller");
+
+        // If a user hasn't opted in for recuded motion, then we add the animation
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            addAnimation();
+        }
+
+        function addAnimation() {
+            scrollers.forEach((scroller) => {
+                // add data-animated="true" to every `.scroller` on the page
+                scroller.setAttribute("data-animated", true);
+
+                // Make an array from the elements within `.scroller-inner`
+                const scrollerInner = scroller.querySelector(".scroller__inner");
+                const scrollerContent = Array.from(scrollerInner.children);
+
+                // For each item in the array, clone it
+                // add aria-hidden to it
+                // add it into the `.scroller-inner`
+                scrollerContent.forEach((item) => {
+                    const duplicatedItem = item.cloneNode(true);
+                    duplicatedItem.setAttribute("aria-hidden", true);
+                    scrollerInner.appendChild(duplicatedItem);
+                });
+            });
+        }
+
+    </script>
+</body>
+
+</html>
+
+<style>
+    img.jh
+    {
+        width: 120px;
+        height: 100%;
+    }
+
+   
+    img.ps
+    {
+        width: 70px;
+        height: 100%;
+    }
+
+    img.volvo
+    {
+        width: 150px;
+        height: 100%;
+    }
+
+
+    img.rb {
+        width: 250px;
+        height: 100%;
+    }
+
+  
+
+    .scroller {
+        max-width: 1200px;
+    }
+
+    .scroller__inner {
+        padding-block: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    .scroller[data-animated="true"] {
+        overflow: hidden;
+        /* -webkit-mask: linear-gradient(90deg,
+                transparent,
+                white 20%,
+                white 80%,
+                transparent);
+        mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent); */
+    }
+
+    .scroller[data-animated="true"] .scroller__inner {
+        width: max-content;
+        flex-wrap: nowrap;
+        animation: scroll var(--_animation-duration, 10s) var(--_animation-direction, forwards) linear infinite;
+    }
+
+    .scroller[data-direction="right"] {
+        --_animation-direction: reverse;
+    }
+
+    .scroller[data-direction="left"] {
+        --_animation-direction: forwards;
+    }
+
+    .scroller[data-speed="fast"] {
+        --_animation-duration: 40s;
+    }
+
+    .scroller[data-speed="slow"] {
+        --_animation-duration: 60s;
+    }
+
+    @keyframes scroll {
+        to {
+            transform: translate(calc(-50% - 0.5rem));
+        }
+    }
+
+    /* general styles */
+
+
+
+    .algemeen {
+        display: grid;
+        min-block-size: 10vh;
+        place-content: center;
+        font-family: system-ui;
+        font-size: 1.125rem;
+    }
+
+    @media (max-width: 720px) {
+
+        img.ams,
+        img.brand,
+        img.lotus,
+        img.bb,
+        img.fc {
+            width: 50px;
+        }
+
+        img.vs,
+        img.dokter,
+        img.rs,
+        img.groener {
+            width: 75px;
+        }
+
+        img.rs {
+            padding-top: 15px
+        }
+
+
+    }
+</style>

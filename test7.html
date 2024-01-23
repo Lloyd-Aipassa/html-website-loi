@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Form</title>
+</head>
+
+<body>
+
+    <app-header></app-header>
+
+
+
+   
+
+    <form id="candidateForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required><br>
+
+        <label for="coverLetter">Cover Letter:</label>
+        <textarea id="coverLetter" name="coverLetter" required></textarea><br>
+
+        <label for="cv">CV:</label>
+        <input type="file" id="cv" name="cv" accept=".pdf" required><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script defer src="/javascript/card.js"></script>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('candidateForm');
+            const formData = new FormData(form);
+
+            // Convert form data to JSON excluding file input fields
+            const jsonData = {};
+            const fileData = new FormData();
+
+            formData.forEach((value, key) => {
+                if (key === 'photo' || key === 'cv') {
+                    // Append file data to a separate FormData for binary upload
+                   fileData.append(key, form.elements[key].files[0])
+                } else {
+                    // Include non-file fields in JSON data
+                    jsonData[key] = value;
+                }
+            });
+
+            showData = Object.fromEntries(formData)
+            console.log(showData)
+
+
+
+            // Perform the fetch request
+            fetch('https://devlloyd.recruitee.com/api/offers/tester/candidates', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ candidate: jsonData }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}, Message: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    // Handle success response
+                })
+                .catch(error => {
+                    console.error('Error:', error.message);
+                    // Handle error
+                });
+        }
+    </script>
+
+</body>
+
+</html>

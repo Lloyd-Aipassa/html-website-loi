@@ -1,0 +1,133 @@
+<html lang="nl">
+
+<style>
+    input#cv,
+    #photo {
+        display: block;
+        opacity: 0;
+        margin-top: -100px;
+        margin-bottom: 50px;
+        pointer-events: none
+    }
+
+    label.test {
+        display: block;
+        color: #1d1d1d;
+        border: 1px solid #1d1d1d;
+        padding: 20px 50px;
+        cursor: pointer;
+        margin-bottom: 50px;
+        width: fit-content;
+    }
+
+    label.test:hover {
+        display: block;
+        color: red;
+        border: 1px solid red;
+        padding: 20px 50px;
+        cursor: pointer;
+        margin-bottom: 50px;
+        width: fit-content;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>test-form</title>
+</head>
+
+<body>
+    <h1 class="test">Vacatures</h1>
+
+    <form id="my-form">
+        <!-- upload cv -->
+        <label for="cvUrl">CV URL:</label>
+        <input type="url" id="cvUrl" name="cvUrl"
+            value="https://qwicko.nl/wp-content/uploads/2024/01/Cv-king-nieuwe-teksten.docx" required><br>
+        <!-- name -->
+        <input type="text" id="name" name="name" placeholder="naam" /><br />
+        <!-- email -->
+        <input type="email" id="email" name="email" placeholder="email" /><br />
+        <!-- phone number -->
+        <input type="tel" id="phone" name="phone" placeholder="tel" /><br />
+        <!-- upload candidate picture -->
+        <label class="test" for="photo">Upload photo:</label><br />
+        <input type="file" id="photo" accept=".jpg, .jpeg, .png" /><br />
+        <!-- upload candidate motivation -->
+
+        <!-- submit the form to recruitee -->
+        <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+        const formEl = document.querySelector("#my-form")
+        formEl.addEventListener('submit', event => {
+            event.preventDefault();
+
+            // get the form data
+            const remote_cv_url = document.getElementById('cvUrl').value;
+            // const cv = document.getElementById('cv').files[0];
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const photo = document.getElementById('photo').files[0];
+            // const coverLetter = document.getElementById('cover_letter').files[0];
+
+            // create the form data
+            const formData = new FormData();
+            const formData2 = new FormData();
+
+
+            console.log(formData)
+
+            // append the form data
+
+            // formData2.append('remote_cv_url', remote_cv_url);
+            // formData2.append('name', name);
+            // formData2.append('email', email);
+            // formData2.append('phone', phone);
+
+            formData.append('remote_cv_url', remote_cv_url);
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+
+            dataa = Object.fromEntries(formData)
+            dataa2 = Object.fromEntries(formData2)
+
+        
+            const payload2 = JSON.stringify({
+                candidate: { ...dataa2 }
+            });
+
+            const payload = JSON.stringify({
+                candidate: { ...dataa }
+            });
+
+
+            console.log(payload)
+            console.log(payload2)
+
+            fetch('https://devlloyd.recruitee.com/api/offers/tester/candidates', {
+                method: 'POST',
+                headers: {
+                    // 'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
+                },
+                body: payload, payload2
+                // body: JSON.stringify(payload),
+            })
+                .then((res) => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err));
+            // .then(console.log);
+        })
+
+    </script>
+
+</body>
+
+</html>

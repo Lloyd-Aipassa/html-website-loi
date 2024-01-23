@@ -1,0 +1,113 @@
+<html lang="nl">
+
+<style>
+    input#cv,
+    #photo {
+        display: block;
+        opacity: 0;
+        margin-top: -100px;
+        margin-bottom: 50px;
+        pointer-events: none
+    }
+
+    label.test {
+        display: block;
+        color: #1d1d1d;
+        border: 1px solid #1d1d1d;
+        padding: 20px 50px;
+        cursor: pointer;
+        margin-bottom: 50px;
+        width: fit-content;
+    }
+
+    label.test:hover {
+        display: block;
+        color: red;
+        border: 1px solid red;
+        padding: 20px 50px;
+        cursor: pointer;
+        margin-bottom: 50px;
+        width: fit-content;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+</head>
+
+<body>
+    <h1 class="test">Vacatures</h1>
+
+    <form id="my-form" enctype="multipart/form-data">
+        <!-- upload cv -->
+        <label for="cvUrl">CV URL:</label>
+        <input type="url" id="cvUrl" name="remote_cv_url"
+            value="https://qwicko.nl/wp-content/uploads/2024/01/Cv-king-nieuwe-teksten.docx" required><br>
+        <!-- name -->
+        <input type="text" id="name" name="name" placeholder="naam" /><br />
+        <!-- email -->
+        <input type="email" id="email" name="email" placeholder="email" /><br />
+        <!-- phone number -->
+        <input type="tel" id="phone" name="phone" placeholder="tel" /><br />
+        <!-- upload candidate picture -->
+        <label class="test" for="photo">Upload photo:</label><br />
+        <input type="file" id="photo" accept=".jpg, .jpeg, .png" /><br />
+        <!-- upload candidate motivation -->
+        <label class="test" for="cover_letter">Upload motivatie:</label><br />
+        <input type="file" id="cover_letter" accept=".pdf, .doc, .docx" /><br />
+        <!-- submit the form to recruitee -->
+        <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+        const formEl = document.querySelector("#my-form")
+        const photo = document.getElementById('photo').files[0];
+       
+        // const file = URL.createObjectURL(photo)
+
+        formEl.addEventListener('submit', event => {
+            event.preventDefault();
+
+            
+            // create the form data
+            const formData = new FormData(formEl);
+            formData.append('photo', photo);
+              console.log(Object.fromEntries(formData))
+      
+
+            dataaa = Object.fromEntries(formData)
+            console.log(dataaa)
+
+            const dataa = Object.fromEntries(formData)
+
+            const payload = {
+                candidate: { ...dataa }
+            }
+
+            console.log(payload)
+
+            fetch('https://devlloyd.recruitee.com/api/offers/tester/candidates', {
+                method: 'POST',
+                headers: {
+                    // 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                    // 'Content-Type': 'multipart/form-data'
+                  
+                    'Content-Type': 'application/json',
+                },
+                // body: payload,
+                body: JSON.stringify(payload),
+            })
+                .then((res) => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err));
+        })
+
+    </script>
+
+</body>
+
+</html>
